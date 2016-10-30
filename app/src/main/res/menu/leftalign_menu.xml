@@ -17,7 +17,7 @@
     <item
         android:id="@+id/brush_2"
         android:title="Size 2"
-        android:icon="@drawable/ic_brightness_1_black_24dp"
+        android:icon="@drawable/ic_lens_black_24dp"
         app:showAsAction="always"/>
     <item
         android:id="@+id/brush_1"
