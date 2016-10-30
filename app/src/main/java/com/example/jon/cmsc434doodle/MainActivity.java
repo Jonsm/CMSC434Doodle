@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.clear:
-                System.out.println("Clear");
+                clearDialog();
                 return true;
 
             case R.id.brush_1:
@@ -91,6 +91,29 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void clearDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Clear Drawing?");
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("cancel");
+            }
+        });
+
+        alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("clear");
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     private void colorDialog() {
