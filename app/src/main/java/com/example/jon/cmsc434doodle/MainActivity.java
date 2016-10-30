@@ -1,19 +1,26 @@
 package com.example.jon.cmsc434doodle;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private ActionMenuView amvMenu;
+    private int mainColor = Color.argb(255,0,0,0);
+    private int mainColorTmp = Color.argb(255,0,0,0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.color:
-                System.out.println("Color");
                 colorDialog();
                 return true;
 
@@ -79,11 +85,29 @@ public class MainActivity extends AppCompatActivity {
         // this is set the view from XML inside AlertDialog
         View alertLayout = getLayoutInflater().inflate(R.layout.color_popup_layout, null);
         alert.setView(alertLayout);
+
+        View colorIndicator = alertLayout.findViewById(R.id.colorIndicator);
+        colorIndicator.setBackgroundColor(mainColor);
+        final ActionMenuItemView colorButton = (ActionMenuItemView) findViewById(R.id.color);
+
+        SeekBar barR = (SeekBar) alertLayout.findViewById(R.id.seekBarR);
+        barR.setProgress(Color.red(mainColor));
+        barR.setOnSeekBarChangeListener(new colorSeekBarListener(2, colorIndicator));
+        SeekBar barG = (SeekBar) alertLayout.findViewById(R.id.seekBarG);
+        barG.setProgress(Color.green(mainColor));
+        barG.setOnSeekBarChangeListener(new colorSeekBarListener(1, colorIndicator));
+        SeekBar barB = (SeekBar) alertLayout.findViewById(R.id.seekBarB);
+        barB.setProgress(Color.blue(mainColor));
+        barB.setOnSeekBarChangeListener(new colorSeekBarListener(0, colorIndicator));
+        SeekBar barA = (SeekBar) alertLayout.findViewById(R.id.seekBarA);
+        barA.setProgress(Color.alpha(mainColor));
+        barA.setOnSeekBarChangeListener(new colorSeekBarListener(3, colorIndicator));
+
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                System.out.println("cancel");
+                mainColorTmp = mainColor;
             }
         });
 
@@ -91,10 +115,51 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                System.out.println("ok");
+                mainColor = mainColorTmp;
+                changeMenuIconColor(colorButton, mainColor);
             }
         });
         AlertDialog dialog = alert.create();
         dialog.show();
+    }
+
+    private void changeMenuIconColor(final ActionMenuItemView icon, final int color) {
+        int drawablesCount = icon.getCompoundDrawables().length;
+        for (int k = 0; k < drawablesCount; k++) {
+            if (icon.getCompoundDrawables()[k] != null) {
+                final int finalK = k;
+                icon.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        icon.getCompoundDrawables()[finalK].setColorFilter(new LightingColorFilter(Color.BLACK, color));
+                    }
+                });
+            }
+        }
+    }
+
+    public class colorSeekBarListener implements SeekBar.OnSeekBarChangeListener {
+        int power;
+        View colorIndicator;
+
+        public colorSeekBarListener(int power, View colorIndicator) {
+            this.power = power;
+            this.colorIndicator = colorIndicator;
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+            mainColorTmp = (mainColorTmp & ~(0xff << 8*power)) | (progressValue << 8*power);
+            colorIndicator.setBackgroundColor(mainColorTmp);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
     }
 }
