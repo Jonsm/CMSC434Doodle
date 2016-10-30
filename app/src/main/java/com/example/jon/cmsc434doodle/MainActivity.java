@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionMenuView amvMenu;
     private int mainColor = Color.argb(255,0,0,0);
     private int mainColorTmp = Color.argb(255,0,0,0);
+    private int brushSize = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +51,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        ActionMenuItemView brush1 = (ActionMenuItemView) findViewById(R.id.brush_1);
+        ActionMenuItemView brush2 = (ActionMenuItemView) findViewById(R.id.brush_2);
+        ActionMenuItemView brush3 = (ActionMenuItemView) findViewById(R.id.brush_3);
+
         switch (item.getItemId()) {
             case R.id.clear:
                 System.out.println("Clear");
                 return true;
 
             case R.id.brush_1:
-                System.out.println("Brush3");
+                brush1.setIcon(getResources().getDrawable(R.drawable.ic_lens_black_12dp));
+                brush2.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_24dp));
+                brush3.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_32dp));
+                brushSize = 1;
                 return true;
 
             case R.id.brush_2:
-                System.out.println("Brush3");
+                brush1.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_12dp));
+                brush2.setIcon(getResources().getDrawable(R.drawable.ic_lens_black_24dp));
+                brush3.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_32dp));
+                brushSize = 2;
                 return true;
 
             case R.id.brush_3:
-                System.out.println("Brush3");
+                brush1.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_12dp));
+                brush2.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_24dp));
+                brush3.setIcon(getResources().getDrawable(R.drawable.ic_lens_black_32dp));
+                brushSize = 3;
                 return true;
 
             case R.id.color:

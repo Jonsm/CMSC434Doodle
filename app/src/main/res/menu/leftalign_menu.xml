@@ -17,12 +17,12 @@
     <item
         android:id="@+id/brush_2"
         android:title="Size 2"
-        android:icon="@drawable/ic_lens_black_24dp"
+        android:icon="@drawable/ic_panorama_fish_eye_black_24dp"
         app:showAsAction="always"/>
     <item
         android:id="@+id/brush_1"
         android:title="Size 1"
-        android:icon="@drawable/ic_lens_black_12dp"
+        android:icon="@drawable/ic_panorama_fish_eye_black_12dp"
         app:showAsAction="always"/>
 
     <!-- Settings, should always be in the overflow -->
