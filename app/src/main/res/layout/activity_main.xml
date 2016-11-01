@@ -16,5 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"/>
     </android.support.v7.widget.Toolbar>
+    
+    <com.example.jon.cmsc434doodle.DoodleView
+        android:id="@+id/doodle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <!-- add your other layout component here -->
 </LinearLayout>

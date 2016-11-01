@@ -16,12 +16,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
-
+//mm spaghetti
 public class MainActivity extends AppCompatActivity {
     private ActionMenuView amvMenu;
+    private DoodleView doodleView;
     private int mainColor = Color.argb(255,0,0,0);
     private int mainColorTmp = Color.argb(255,0,0,0);
-    private int brushSize = 3;
+    private float brushSize = 55;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("");
+
+        doodleView = (DoodleView) findViewById(R.id.doodle);
+        doodleView.setColor(mainColor);
+        doodleView.setWidth(brushSize);
     }
 
     @Override
@@ -58,39 +63,41 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.clear:
                 clearDialog();
-                return true;
+                break;
 
             case R.id.brush_1:
                 brush1.setIcon(getResources().getDrawable(R.drawable.ic_lens_black_12dp));
                 brush2.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_24dp));
                 brush3.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_32dp));
-                brushSize = 1;
-                return true;
+                brushSize = 15;
+                break;
 
             case R.id.brush_2:
                 brush1.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_12dp));
                 brush2.setIcon(getResources().getDrawable(R.drawable.ic_lens_black_24dp));
                 brush3.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_32dp));
-                brushSize = 2;
-                return true;
+                brushSize = 35;
+                break;
 
             case R.id.brush_3:
                 brush1.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_12dp));
                 brush2.setIcon(getResources().getDrawable(R.drawable.ic_panorama_fish_eye_black_24dp));
                 brush3.setIcon(getResources().getDrawable(R.drawable.ic_lens_black_32dp));
-                brushSize = 3;
-                return true;
+                brushSize = 55;
+                break;
 
             case R.id.color:
                 colorDialog();
-                return true;
+                break;
 
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
+
+        doodleView.setWidth(brushSize);
+        return true;
     }
 
     private void clearDialog() {
@@ -101,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                System.out.println("cancel");
             }
         });
 
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                System.out.println("clear");
+                doodleView.clear();
             }
         });
         AlertDialog dialog = alert.create();
@@ -154,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 mainColor = mainColorTmp;
                 changeMenuIconColor(colorButton, mainColor);
+                doodleView.setColor(mainColor);
             }
         });
         AlertDialog dialog = alert.create();
