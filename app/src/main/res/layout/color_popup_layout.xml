@@ -25,10 +25,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_height="54dp">
 
         <TextView
-            android:text="   R"
+            android:text="R"
             android:layout_width="30dp"
             android:id="@+id/textViewR"
             android:gravity="center_vertical"
@@ -46,10 +48,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_height="54dp">
 
         <TextView
-            android:text="   G"
+            android:text="G"
             android:layout_width="30dp"
             android:id="@+id/textViewG"
             android:gravity="center_vertical"
@@ -67,10 +71,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_height="54dp">
 
         <TextView
-            android:text="   B"
+            android:text="B"
             android:layout_width="30dp"
             android:id="@+id/textViewB"
             android:gravity="center_vertical"
@@ -88,10 +94,12 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_height="54dp">
 
         <TextView
-            android:text="   A"
+            android:text="A"
             android:layout_width="30dp"
             android:id="@+id/textViewA"
             android:gravity="center_vertical"
@@ -106,4 +114,17 @@
             android:max="255" />
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:paddingLeft="10dp">
+
+        <CheckBox
+            android:text="Rainbow Mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox"
+            android:layout_weight="1" />
+    </LinearLayout>
 </LinearLayout>

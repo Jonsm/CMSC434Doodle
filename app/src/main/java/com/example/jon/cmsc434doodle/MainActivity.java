@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mainToolbar);
+        //strategy to aline toolbar icons in custom menu from stack overflow
         amvMenu = (ActionMenuView) myToolbar.findViewById(R.id.amvMenu);
         amvMenu.setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
             @Override
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    //this is from stack overflow
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Color");
         // this is set the view from XML inside AlertDialog
+        //partly from http://www.pcsalt.com/android/create-alertdialog-with-custom-layout-using-xml-layout/
         View alertLayout = getLayoutInflater().inflate(R.layout.color_popup_layout, null);
         alert.setView(alertLayout);
 
@@ -167,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    //Changing icon color from stack overflow
     private void changeMenuIconColor(final ActionMenuItemView icon, final int color) {
         int drawablesCount = icon.getCompoundDrawables().length;
         for (int k = 0; k < drawablesCount; k++) {
